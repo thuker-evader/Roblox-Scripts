@@ -1,0 +1,79 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Flying variables
+local flying = false
+local speed = 50
+
+-- Function to handle flying
+local function fly()
+    local bodyVelocity = Instance.new("BodyVelocity")
+    bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+    bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+    bodyVelocity.Parent = rootPart
+    
+    local bodyGyro = Instance.new("BodyGyro")
+    bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+    bodyGyro.P = 9000
+    bodyGyro.Parent = rootPart
+    
+    -- Main flying loop
+    while flying do
+        if not flying then break end
+        
+        local moveDirection = Vector3.new(0, 0, 0)
+        
+        -- Get input for movement
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
+            moveDirection = moveDirection + (workspace.CurrentCamera.CFrame.LookVector * speed)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
+            moveDirection = moveDirection - (workspace.CurrentCamera.CFrame.LookVector * speed)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
+            moveDirection = moveDirection - (workspace.CurrentCamera.CFrame.RightVector * speed)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
+            moveDirection = moveDirection + (workspace.CurrentCamera.CFrame.RightVector * speed)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
+            moveDirection = moveDirection + Vector3.new(0, speed, 0)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+            moveDirection = moveDirection - Vector3.new(0, speed, 0)
+        end
+        
+        bodyVelocity.Velocity = moveDirection
+        bodyGyro.CFrame = workspace.CurrentCamera.CFrame
+        
+        game:GetService("RunService").RenderStepped:Wait()
+    end
+    
+    bodyVelocity:Destroy()
+    bodyGyro:Destroy()
+end
+
+-- Toggle flying with F key
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.P then
+        flying = not flying
+        if flying then
+            fly()
+        end
+    end
+end)
+
+-- Reset flying state when character dies
+humanoid.Died:Connect(function()
+    flying = false
+end)
+
+-- Handle character respawn
+player.CharacterAdded:Connect(function(newCharacter)
+    character = newCharacter
+    humanoid = character:WaitForChild("Humanoid")
+    rootPart = character:WaitForChild("HumanoidRootPart")
+    flying = false
+end)
