@@ -1,8 +1,8 @@
-#Roblox Scripts Repository
+Roblox Scripts Repository
 
 Welcome to the Roblox Scripts repository! This repository is dedicated to providing a collection of useful scripts designed to enhance gameplay, automate tasks, and improve overall functionality within Roblox. Whether you're a developer looking for helpful tools or a player searching for exciting modifications, you'll find a variety of scripts here to explore.
 
-#About
+About
 
 This repository contains a diverse selection of scripts created for different purposes within Roblox, including:
 
@@ -14,7 +14,7 @@ UI & Interface Tweaks – Enhancements to the user interface for a better experi
 
 Security & Anti-Cheat Measures – Scripts to help developers detect and prevent exploits.
 
-#Getting Started
+Getting Started
 
 To use these scripts, follow these steps:
 
@@ -26,7 +26,7 @@ Run the Script – Inject the script using a compatible executor (e.g., Synapse 
 
 Disclaimer: Be cautious when using third-party executors, as they may violate Roblox's Terms of Service. Always ensure your account's safety before running any script.
 
-#Contributing
+Contributing
 
 We welcome contributions from the community! If you have a script you'd like to share, follow these steps:
 
@@ -38,10 +38,10 @@ Submit a pull request with a brief description of the script.
 
 Please ensure your contributions are safe, well-documented, and abide by Roblox's policies.
 
-#Disclaimer
+Disclaimer
 
 This repository is intended for educational and personal use only. We do not encourage or support malicious activities, cheating, or exploiting in any way. Use these scripts responsibly, and always respect game developers' efforts.
 
-#Contact & Support
+Contact & Support
 
 If you have any questions, suggestions, or issues, feel free to open an issue in this repository or reach out to us via our community channels.
